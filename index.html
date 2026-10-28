@@ -4,37 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUSS LAB 논산 Day & Night 시크릿 투어 | 프로젝트 설명서</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        berry: {
-                            50: '#fff1f2',
-                            100: '#ffe4e6',
-                            200: '#fecdd3',
-                            500: '#f43f5e',
-                            600: '#e63946',
-                            700: '#be123c',
-                            800: '#9f1239',
-                        },
-                        night: {
-                            800: '#0f172a',
-                            900: '#020617',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Pretendard', 'Inter', 'sans-serif'],
-                    }
-                }
-            }
+            theme: { extend: {
+                colors: {
+                    berry: { 50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 400: '#fb7185', 500: '#f43f5e', 600: '#e63946', 700: '#be123c', 800: '#9f1239' }
+                },
+                fontFamily: { sans: ['Pretendard', 'Inter', 'sans-serif'] }
+            }}
         }
     </script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; }
@@ -47,396 +28,289 @@
             background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
             background-size: 16px 16px;
         }
+        /* 섹션 = 노트북 화면 한 장 (상단 메뉴 4rem 제외) */
+        .fit-screen { min-height: calc(100svh - 4rem); display: flex; flex-direction: column; justify-content: center; }
+        .pin { cursor: pointer; transition: transform .25s; transform-box: fill-box; transform-origin: 50% 100%; }
+        .pin:hover, .pin.on { transform: scale(1.2); }
+        .pin:focus-visible path, .pin:focus-visible circle { stroke: #fbbf24; stroke-width: 4; }
+        .fa-svg { font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        @keyframes pulse { 0% { r: 38; opacity: .8 } 100% { r: 66; opacity: 0 } }
+        .pulse { animation: pulse 1.8s ease-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-berry-600 selection:text-white">
 
-    <!-- Header Navigation -->
+    <!-- NAV -->
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center space-x-3">
-                    <span class="bg-slate-900 text-white font-extrabold text-xs px-2.5 py-1 rounded-md uppercase tracking-wide">
-                        HUSS LAB
-                    </span>
+                    <span class="bg-slate-900 text-white font-extrabold text-xs px-2.5 py-1 rounded-md uppercase tracking-wide">HUSS LAB</span>
                     <span class="text-slate-300">|</span>
-                    <span class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-1.5">
-                        🍓 논산 <span class="text-berry-600">Day & Night</span> 딸기 시크릿 투어
-                    </span>
+                    <span class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-1.5">🍓 논산 <span class="text-berry-600">Day & Night</span> <span class="hidden sm:inline">딸기 시크릿 투어</span></span>
                 </div>
                 <div class="hidden lg:flex space-x-6 text-sm font-bold text-slate-600">
                     <a href="#overview" class="hover:text-berry-600 transition">프로젝트 개요</a>
                     <a href="#solutions" class="hover:text-berry-600 transition">문제 해결 체계</a>
                     <a href="#map-zones" class="hover:text-berry-600 transition">관광지별 지도 & 프로그램</a>
-                    <a href="#benefits" class="hover:text-berry-600 transition">투어 메커니즘</a>
-                    <a href="#calculator" class="hover:text-berry-600 transition">마일리지 시뮬레이터</a>
+                    <a href="#story" class="hover:text-berry-600 transition">투어 스토리</a>
                 </div>
-                <a href="#calculator" class="bg-berry-600 hover:bg-berry-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl transition shadow-md shadow-berry-200 flex items-center gap-2">
-                    <i class="fa-solid fa-calculator"></i> 마일리지 계산하기
-                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Showcase Section -->
-    <header class="relative overflow-hidden bg-gradient-to-br from-berry-50 via-white to-amber-50/40 pt-10 pb-16 border-b border-berry-100 bg-grid-pattern">
+    <!-- HERO -->
+    <header class="fit-screen relative overflow-hidden bg-gradient-to-br from-berry-50 via-white to-amber-50/40 py-10 border-b border-berry-100 bg-grid-pattern">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-4xl mx-auto">
                 <div class="inline-flex items-center gap-2 bg-berry-100/80 border border-berry-200 text-berry-700 font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full mb-6 shadow-sm">
                     <i class="fa-solid fa-star text-amber-500"></i> HUSS LAB × 2027 논산세계딸기산업엑스포 연계 프로젝트 제안서
                 </div>
                 <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-                    정해진 규칙는 없어요!<br>
+                    정해진 규칙은 없어요!<br>
                     축제장을 거점으로 <span class="text-berry-600 underline decoration-berry-200 underline-offset-8">낮부터 밤까지</span>
                 </h1>
                 <p class="mt-6 text-base sm:text-xl text-slate-600 leading-relaxed font-medium">
-                    딸기축제장을 넘어 논산을 달콤하게 연결하는<br class="hidden sm:inline"> 
+                    딸기축제장을 넘어 논산을 달콤하게 연결하는<br class="hidden sm:inline">
                     <span class="font-bold text-slate-900">분산형 체류 관람 플랫폼 솔루션</span>
                 </p>
-
-                <!-- Key Metrics / Stats Highlights -->
                 <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm">
-                        <div class="text-berry-600 text-2xl sm:text-3xl font-black">5개</div>
-                        <div class="text-xs text-slate-500 font-bold mt-1">핵심 관광지 네트워크</div>
-                    </div>
-                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm">
-                        <div class="text-indigo-600 text-2xl sm:text-3xl font-black">Day&Night</div>
-                        <div class="text-xs text-slate-500 font-bold mt-1">낮·밤 특화 컨텐츠</div>
-                    </div>
-                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm">
-                        <div class="text-emerald-600 text-2xl sm:text-3xl font-black">10~20%</div>
-                        <div class="text-xs text-slate-500 font-bold mt-1">스마트 마일리지 환급</div>
-                    </div>
-                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm">
-                        <div class="text-amber-600 text-2xl sm:text-3xl font-black">ZERO</div>
-                        <div class="text-xs text-slate-500 font-bold mt-1">딸기 휴대 부담 해소</div>
-                    </div>
+                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm"><div class="text-berry-600 text-2xl sm:text-3xl font-black">5개</div><div class="text-xs text-slate-500 font-bold mt-1">핵심 관광지 네트워크</div></div>
+                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm"><div class="text-indigo-600 text-2xl sm:text-3xl font-black">Day&Night</div><div class="text-xs text-slate-500 font-bold mt-1">낮·밤 특화 컨텐츠</div></div>
+                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm"><div class="text-emerald-600 text-2xl sm:text-3xl font-black">10~20%</div><div class="text-xs text-slate-500 font-bold mt-1">스마트 마일리지 환급</div></div>
+                    <div class="bg-white/80 backdrop-blur-sm border border-slate-200 p-4 rounded-2xl shadow-sm"><div class="text-amber-600 text-2xl sm:text-3xl font-black">ZERO</div><div class="text-xs text-slate-500 font-bold mt-1">딸기 휴대 부담 해소</div></div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Project Context & Vision -->
-    <section id="overview" class="py-14 bg-white border-b border-slate-200">
+    <!-- OVERVIEW -->
+    <section id="overview" class="fit-screen py-12 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-5">
                     <span class="text-berry-600 font-bold text-xs sm:text-sm uppercase tracking-widest">Project Vision & Background</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2 leading-tight">
-                        왜 '논산 Day & Night<br>딸기 시크릿 투어'인가?
-                    </h2>
-                    <p class="text-slate-600 text-sm sm:text-base mt-4 leading-relaxed">
-                        논산 딸기축제는 매년 성황리에 개최되지만, **축제장 내부의 밀집 및 정체**, **구매한 딸기 휴대의 불편함**, 그리고 **축제 경험의 일회성 한계**를 해결하기 위해 기획되었습니다.
-                    </p>
-                    <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-                        본 프로젝트는 **2027 논산세계딸기산업엑스포**를 맞아, 축제장을 거점으로 논산의 역사·문화·자연 거점을 신선 보관소와 피규어 교통카드, 마일리지 시스템으로 연결합니다.
-                    </p>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2 leading-tight">왜 '논산 Day & Night<br>딸기 시크릿 투어'인가?</h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-4 leading-relaxed">논산 딸기축제는 매년 성황리에 개최되지만, <b>축제장 내부의 밀집 및 정체</b>, <b>구매한 딸기 휴대의 불편함</b>, 그리고 <b>축제 경험 이후 이어갈 콘텐츠 부족</b>으로 관람객 체류 시간이 짧다는 과제를 안고 있었습니다.</p>
+                    <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">본 프로젝트는 <b>2027 논산세계딸기산업엑스포</b>를 맞아, 축제장을 거점으로 논산의 역사·문화·자연 거점을 신선 보관소와 피규어 교통카드, 마일리지 시스템으로 연결하여 지역 상생형 체류 모델을 제시합니다.</p>
                 </div>
                 <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="p-6 rounded-2xl bg-slate-900 text-white space-y-2 relative overflow-hidden shadow-xl">
-                        <div class="text-berry-400 font-extrabold text-sm uppercase">Goal 01</div>
-                        <h3 class="text-lg font-bold">축제 내 혼잡 해소</h3>
-                        <p class="text-xs text-slate-300 leading-relaxed">신선 냉장 보관소 및 피규어 교통카드 도입으로 이동 장벽 제거</p>
+                    <div class="p-6 rounded-2xl bg-slate-900 text-white space-y-2 shadow-xl"><div class="text-berry-400 font-extrabold text-sm uppercase">Goal 01</div><h3 class="text-lg font-bold">축제 내 혼잡 해소</h3><p class="text-xs text-slate-300 leading-relaxed">신선 냉장 보관소 및 피규어 교통카드 도입으로 이동 장벽 제거</p></div>
+                    <div class="p-6 rounded-2xl bg-berry-600 text-white space-y-2 shadow-xl"><div class="text-berry-200 font-extrabold text-sm uppercase">Goal 02</div><h3 class="text-lg font-bold">논산 전역 관광객 분산</h3><p class="text-xs text-berry-100 leading-relaxed">강경·연산·노성·탑정호 4개 관광지로 관광객을 분산하여 주변 상권 동반 성장</p></div>
+                    <div class="p-6 rounded-2xl bg-amber-500 text-slate-900 space-y-2 shadow-xl"><div class="text-amber-900 font-extrabold text-xs uppercase">Goal 03</div><h3 class="text-lg font-bold">야간 경제(Night Economy) 활성화</h3><p class="text-xs text-amber-950 font-medium leading-relaxed">국악x힙합 DJ, 야외 영화제, 미디어 파사드 등 밤 시간대 특화 콘텐츠 제공</p></div>
+                    <div class="p-6 rounded-2xl bg-emerald-600 text-white space-y-2 shadow-xl"><div class="text-emerald-200 font-extrabold text-sm uppercase">Goal 04</div><h3 class="text-lg font-bold">선순환 마일리지</h3><p class="text-xs text-emerald-100 leading-relaxed">소비액의 10~20% 환급으로 대중교통 이용 유도</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM / SOLUTION : DAY & NIGHT -->
+    <section id="solutions" class="min-h-[calc(100svh-4rem)] grid md:grid-cols-2 border-b border-slate-200">
+        <!-- DAY -->
+        <div class="bg-gradient-to-br from-amber-50 via-white to-berry-50 px-4 sm:px-10 py-12 flex flex-col justify-center md:items-end">
+            <div class="w-full max-w-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="bg-berry-100 text-berry-700 font-bold text-xs px-3.5 py-1 rounded-full uppercase">DAY · INSIDE FESTIVAL</span>
+                    <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-triangle-exclamation text-amber-500"></i> 내부 페인포인트 해소</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900"><i class="fa-solid fa-sun text-amber-500"></i> 낮, 축제장 안에서</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-5">무거운 짐, 수용 한계, 구매 부담을 해소합니다.</p>
+                <div class="space-y-3">
+                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                        <div class="text-xs font-bold text-slate-400 mb-1"><span class="text-rose-500">[문제]</span> 생딸기 상온 노출 및 양손 휴대 부담</div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-snowflake text-sky-500"></i> 딸기 신선 냉장 보관소 운영</h4>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">산 딸기를 안전하게 위탁하고 손가볍게 주변 관광지로 출발합니다.</p>
                     </div>
-                    <div class="p-6 rounded-2xl bg-berry-600 text-white space-y-2 relative overflow-hidden shadow-xl">
-                        <div class="text-berry-200 font-extrabold text-sm uppercase">Goal 02</div>
-                        <h3 class="text-lg font-bold">논산 전역 관광객 분산</h3>
-                        <p class="text-xs text-berry-100 leading-relaxed">강경·연산·노성·탑정호 4개 관광지로 관광객을 분산하여 주변 상권 동반 성장</p>
+                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                        <div class="text-xs font-bold text-slate-400 mb-1"><span class="text-rose-500">[문제]</span> 복잡한 대중교통 이용 및 이동 번거로움</div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-id-card text-indigo-500"></i> 한정판 피규어 교통카드 발급</h4>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">대만 EasyCard 모티브의 키링형 카드로 시내버스와 셔틀을 편하게 이용합니다.</p>
                     </div>
-                    <div class="p-6 rounded-2xl bg-amber-500 text-slate-900 space-y-2 relative overflow-hidden shadow-xl">
-                        <div class="text-amber-900 font-extrabold text-xs uppercase">Goal 03</div>
-                        <h3 class="text-lg font-bold">야간 경제(Night Economy) 활성화</h3>
-                        <p class="text-xs text-amber-950 font-medium leading-relaxed">국악x힙합 DJ, 야외 영화제, 미디어 파사드 등 밤 시간대 특화 콘텐츠 제공</p>
+                    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                        <div class="text-xs font-bold text-slate-400 mb-1"><span class="text-rose-500">[문제]</span> 축제장 내 일회성 단순 소비</div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-ticket-simple text-emerald-500"></i> 10~20% 즉시 마일리지 지급</h4>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">영수증 적립 시 소비액의 10~20%를 환급해 관내 상점가와 이동에 재소비하도록 유도합니다.</p>
                     </div>
-                    <div class="p-6 rounded-2xl bg-emerald-600 text-white space-y-2 relative overflow-hidden shadow-xl">
-                        <div class="text-emerald-200 font-extrabold text-sm uppercase">Goal 04</div>
-                        <h3 class="text-lg font-bold">선순환 마일리지</h3>
-                        <p class="text-xs text-emerald-100 leading-relaxed">소비액의 10~20% 환급으로 대중교통 이용 유도</p>
+                </div>
+            </div>
+        </div>
+        <!-- NIGHT -->
+        <div class="bg-slate-900 text-white px-4 sm:px-10 py-12 flex flex-col justify-center md:items-start">
+            <div class="w-full max-w-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold text-xs px-3.5 py-1 rounded-full uppercase">NIGHT · OUTSIDE FESTIVAL</span>
+                    <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-moon text-indigo-400"></i> 체류 시간 확장 & 분산</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold"><i class="fa-solid fa-moon text-indigo-400"></i> 밤, 축제장 밖에서</h3>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1 mb-5">도로 정체를 해소하고 야간 체류 시간을 늘립니다.</p>
+                <div class="space-y-3">
+                    <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700">
+                        <div class="text-xs font-bold text-indigo-400 mb-1"><span class="text-amber-400">[문제]</span> 축제장 주변 병목 현상 및 교통 혼잡</div>
+                        <h4 class="font-bold flex items-center gap-2"><i class="fa-solid fa-network-wired text-amber-400"></i> 4대 외부 관광지 코스로 분산</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1 leading-relaxed">강경·연산·노성·탑정호로 인파를 분산시켜 정체를 완화하고 논산의 매력을 알립니다.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700">
+                        <div class="text-xs font-bold text-indigo-400 mb-1"><span class="text-amber-400">[문제]</span> 해가 지면 귀가하는 조기 이탈 현상</div>
+                        <h4 class="font-bold flex items-center gap-2"><i class="fa-solid fa-music text-purple-400"></i> Day & Night 시크릿 밤 프로그램</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1 leading-relaxed">국악×힙합 DJ, 힙-선비 와인 바, 별빛 영화제, 미디어 파사드로 야간 체류를 유도합니다.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700">
+                        <div class="text-xs font-bold text-indigo-400 mb-1"><span class="text-amber-400">[문제]</span> 축제 수익의 지역 상권 파급 부족</div>
+                        <h4 class="font-bold flex items-center gap-2"><i class="fa-solid fa-store text-emerald-400"></i> 지역 상점가 제휴 연계 혜택</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1 leading-relaxed">마일리지 사용처를 논산 상점가와 대중교통으로 넓혀 소상공인에게 온기를 전합니다.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Comprehensive Problem & Solution Matrix -->
-    <section id="solutions" class="py-16 bg-slate-50 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-berry-600 font-bold text-xs sm:text-sm uppercase tracking-widest">Problem Solving Strategy</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">축제 내부 & 외부 문제 종합 해결 체계</h2>
-                <p class="text-slate-500 text-sm sm:text-base mt-2">관람객이 느끼는 페인 포인트(Pain Point)를 정확히 타격하는 맞춤형 해결책</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- 축제 내부 문제 해결책 (Inside Festival) -->
-                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-berry-200 shadow-lg relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="bg-berry-100 text-berry-700 font-bold text-xs px-3.5 py-1 rounded-full uppercase">INSIDE FESTIVAL</span>
-                            <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-triangle-exclamation text-amber-500"></i> 내부 페인포인트 해소</span>
-                        </div>
-                        <h3 class="text-2xl font-extrabold text-slate-900 mb-2">축제 내부 문제 해결책</h3>
-                        <p class="text-xs sm:text-sm text-slate-500 mb-6">축제장 안에서의 무거운 짐, 수용 한계, 구매 부담을 해소합니다.</p>
-
-                        <div class="space-y-4">
-                            <!-- Issue 1 -->
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                                <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase mb-1">
-                                    <span class="text-rose-500">[문제]</span> 생딸기 상온 노출 및 양손 휴대 부담
-                                </div>
-                                <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <i class="fa-solid fa-snowflake text-sky-500"></i> 딸기 신선 냉장 보관소 운영
-                                </h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                                    축제장에서 산 생딸기를 신선 냉장 보관소에 안전하게 위탁합니다. 무거운 짐 없이 손가볍게 주변 관광지로 투어를 출발할 수 있습니다.
-                                </p>
-                            </div>
-
-                            <!-- Issue 2 -->
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                                <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase mb-1">
-                                    <span class="text-rose-500">[문제]</span> 복잡한 대중교통 이용 및 이동 번거로움
-                                </div>
-                                <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <i class="fa-solid fa-id-card text-indigo-500"></i> 한정판 피규어 교통카드 발급
-                                </h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                                    대만 EasyCard 모티브의 캐릭터 키링형 피규어 교통카드를 안내센터에서 발급하여, 시내버스 및 이동 셔틀을 편하게 이용합니다.
-                                </p>
-                            </div>
-
-                            <!-- Issue 3 -->
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                                <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase mb-1">
-                                    <span class="text-rose-500">[문제]</span> 축제장 내 일회성 단순 소비
-                                </div>
-                                <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                                    <i class="fa-solid fa-ticket-simple text-emerald-500"></i> 10~20% 즉시 마일리지 지급
-                                </h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                                    축제장 소비 영수증 적립 시 소비액의 10~20%를 환급하여, 투어 과정 중 관내 상점가 및 이동 비용으로 재소비되도록 유도합니다.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 축제 외부 문제 해결책 (Outside Festival) -->
-                <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-lg relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold text-xs px-3.5 py-1 rounded-full uppercase">OUTSIDE FESTIVAL</span>
-                            <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-moon text-indigo-400"></i> 체류 시간 확장 & 분산</span>
-                        </div>
-                        <h3 class="text-2xl font-extrabold text-white mb-2">축제 외부 문제 해결책</h3>
-                        <p class="text-xs sm:text-sm text-slate-400 mb-6">축제장 인근 도로 정체 해소 및 야�� 관광 체류 시간을 증대합니다.</p>
-
-                        <div class="space-y-4">
-                            <!-- Issue 1 -->
-                            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700">
-                                <div class="flex items-center gap-2 text-xs font-bold text-indigo-400 uppercase mb-1">
-                                    <span class="text-amber-400">[문제]</span> 축제장 주변 병목 현상 및 교통 혼잡
-                                </div>
-                                <h4 class="font-bold text-white text-base flex items-center gap-2">
-                                    <i class="fa-solid fa-network-wired text-amber-400"></i> 4대 외부 관광지 코스로 관광객 분산
-                                </h4>
-                                <p class="text-slate-300 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                                    강경, 연산, 노성, 탑정호로 대표되는 논산의 거점으로 인파를 분산시켜 정체를 완화하고 논산의 매력을 알립니다.
-                                </p>
-                            </div>
-
-                            <!-- Issue 2 -->
-                            <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700">
-                                <div class="flex items-center gap-2 text-xs font-bold text-indigo-400 uppercase mb-1">
-                                    <span class="text-amber-400">[문제]</span> 해가 지면 귀가하는 조기 이탈 현상
-                                </div>
-                                <h4 class="font-bold text-white text-base flex items-center gap-2">
-                                    <i class="fa-solid fa-music text-purple-400"></i> Day & Night 시크릿 밤 프로그램
-                                </h4>
-                                <p class="text-slate-300 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                                    국악×힙합 DJ, 힙-선비 와인 바, 별빛 야외 영화제, 미디어 파사드 등 밤에 더 뜨거운 차별화된 콘텐츠로 야간 체류를 유도합니다.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Zone Map & Program Explorer -->
-    <section id="map-zones" class="py-16 bg-slate-900 text-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
+    <!-- MAP -->
+    <section id="map-zones" class="fit-screen py-10 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-6">
                 <span class="text-berry-400 font-bold text-xs sm:text-sm uppercase tracking-widest">Visual Map & Zones</span>
-                <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">논산 딸기 지도 & 컨별 DAY & NIGHT</h2>
-                <p class="text-slate-400 text-sm sm:text-base mt-2">정해진 코스 없이 거점을 중심으로 클릭하여 프로그램을 확인하세요</p>
+                <h2 class="text-2xl sm:text-3xl font-black mt-1">논산 딸기 지도 & 코스별 DAY & NIGHT</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2">정해진 코스 없이, 핀을 클릭해 프로그램을 확인하세요</p>
             </div>
-
-            <!-- Simplified Interactive Map Canvas Concept -->
-            <div class="bg-slate-950 p-4 sm:p-6 rounded-3xl border border-slate-800 mb-8 relative overflow-hidden">
-                <div class="absolute inset-0 bg-dot-pattern opacity-30"></div>
-                
-                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                    <!-- Map Graphic Grid (Representing the Infographic Map) -->
-                    <div class="lg:col-span-7 bg-slate-900/90 rounded-2xl p-6 border border-slate-800 min-h-[320px] flex flex-col justify-between relative">
-                        <div class="flex justify-between items-center text-xs text-slate-400 mb-4 border-b border-slate-800 pb-2">
-                            <span><i class="fa-solid fa-map-pin text-berry-500"></i> 논산시 거점 약도</span>
-                            <span class="text-slate-500">* 실제 거리 및 축척과 다름</span>
-                        </div>
-
-                        <!-- Hub Nodes -->
-                        <div class="relative h-64 sm:h-72 w-full flex items-center justify-center">
-                            <!-- Center Hub: 엑스포 -->
-                            <button onclick="selectZone('hub')" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-berry-600 hover:scale-110 text-white p-3 sm:p-4 rounded-full shadow-lg shadow-berry-500/20 flex flex-col items-center gap-1">
-                                <i class="fa-solid fa-strawberry text-xl sm:text-2xl"></i>
-                                <span class="text-[10px] font-black mt-1 whitespace-nowrap bg-slate-900/90 px-2 py-0.5 rounded text-berry-200">딸기 엑스포</span>
-                            </button>
-
-                            <!-- Top Left: 노성면 유교문화진흥원 -->
-                            <button onclick="selectZone('yugyo')" class="absolute top-4 left-8 sm:left-16 bg-slate-800 hover:bg-amber-600 border border-amber-500/50 text-white px-3 py-2 rounded-xl transition flex items-center gap-2 group">
-                                <i class="fa-solid fa-landmark text-amber-400 group-hover:text-white"></i>
-                                <span class="text-xs font-bold">유교문화진흥원</span>
-                            </button>
-
-                            <!-- Top Right: 연산문화창고 -->
-                            <button onclick="selectZone('yeonsan')" class="absolute top-4 right-8 sm:right-16 bg-slate-800 hover:bg-emerald-600 border border-emerald-500/50 text-white px-3 py-2 rounded-xl transition flex items-center gap-2 group">
-                                <i class="fa-solid fa-warehouse text-emerald-400 group-hover:text-white"></i>
-                                <span class="text-xs font-bold">연산문화창고</span>
-                            </button>
-
-                            <!-- Bottom Left: 강경 근대역사문화거리 -->
-                            <button onclick="selectZone('gyanggyeong')" class="absolute bottom-4 left-6 sm:left-12 bg-slate-800 hover:bg-purple-600 border border-purple-500/50 text-white px-3 py-2 rounded-xl transition flex items-center gap-2 group">
-                                <i class="fa-solid fa-building-columns text-purple-400 group-hover:text-white"></i>
-                                <span class="text-xs font-bold">강경 근대거리</span>
-                            </button>
-
-                            <!-- Bottom Right: 탑정호 수변공원 -->
-                            <button onclick="selectZone('topjeong')" class="absolute bottom-4 right-6 sm:right-12 bg-slate-800 hover:bg-blue-600 border border-blue-500/50 text-white px-3 py-2 rounded-xl transition flex items-center gap-2 group">
-                                <i class="fa-solid fa-water text-blue-400 group-hover:text-white"></i>
-                                <span class="text-xs font-bold">탑정호 수변공원</span>
-                            </button>
-
-                            <!-- Connecting Lines (Visual decoration) -->
-                            <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-30 stroke-slate-600" stroke-width="2" stroke-dasharray="4">
-                                <line x1="50%" y1="50%" x2="25%" y2="20%" />
-                                <line x1="50%" y1="50%" x2="75%" y2="20%" />
-                                <line x1="50%" y1="50%" x2="25%" y2="80%" />
-                                <line x1="50%" y1="50%" x2="75%" y2="80%" />
-                            </svg>
-                        </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                <!-- 지도 -->
+                <div class="lg:col-span-7 bg-slate-950 p-4 rounded-3xl border border-slate-800 relative overflow-hidden flex flex-col">
+                    <div class="absolute inset-0 bg-dot-pattern opacity-30"></div>
+                    <div class="relative z-10 flex justify-between items-center text-xs text-slate-400 mb-3 border-b border-slate-800 pb-2">
+                        <span><i class="fa-solid fa-map-pin text-berry-500"></i> 논산시 거점 약도</span>
+                        <span class="text-slate-500">* 실제 거리 및 축척과 다름</span>
                     </div>
-
-                    <!-- Zone Quick Legend & Selector -->
-                    <div class="lg:col-span-5 space-y-2">
-                        <p class="text-xs font-bold text-slate-400 mb-2">코스를 선택하여 상세 프로그램 조회:</p>
-                        <button onclick="selectZone('hub')" id="tab-hub" class="zone-btn w-full text-left p-3 rounded-2xl border transition flex items-center justify-between bg-berry-600 border-berry-500 text-white">
-                            <span class="font-bold text-sm">🍓 1. 딸기축제장 · 엑스포 (거점)</span>
-                            <span class="text-xs opacity-80">보관소 & 마일리지</span>
-                        </button>
-                        <button onclick="selectZone('gyanggyeong')" id="tab-gyanggyeong" class="zone-btn w-full text-left p-3 rounded-2xl border transition flex items-center justify-between bg-slate-800 border-slate-700 text-slate-300">
-                            <span class="font-bold text-sm">🏛️ 2. 강경 근대역사문화거리</span>
-                            <span class="text-xs opacity-80">힙-선비 & 버스킹</span>
-                        </button>
-                        <button onclick="selectZone('yeonsan')" id="tab-yeonsan" class="zone-btn w-full text-left p-3 rounded-2xl border transition flex items-center justify-between bg-slate-800 border-slate-700 text-slate-300">
-                            <span class="font-bold text-sm">🎨 3. 연산문화창고</span>
-                            <span class="text-xs opacity-80">피크닉 & 야간영화</span>
-                        </button>
-                        <button onclick="selectZone('yugyo')" id="tab-yugyo" class="zone-btn w-full text-left p-3 rounded-2xl border transition flex items-center justify-between bg-slate-800 border-slate-700 text-slate-300">
-                            <span class="font-bold text-sm">🏮 4. 유교문화진흥원</span>
-                            <span class="text-xs opacity-80">국악x힙합 & 재즈</span>
-                        </button>
-                        <button onclick="selectZone('topjeong')" id="tab-topjeong" class="zone-btn w-full text-left p-3 rounded-2xl border transition flex items-center justify-between bg-slate-800 border-slate-700 text-slate-300">
-                            <span class="font-bold text-sm">🌉 5. 탑정호 수변공원</span>
-                            <span class="text-xs opacity-80">노을 & 미디어파사드</span>
-                        </button>
-                    </div>
+                    <svg viewBox="0 0 722 540" class="relative z-10 w-full h-auto mx-auto rounded-2xl" style="max-height:58svh" role="img" aria-label="논산 거점 지도">
+                        <rect width="722" height="540" fill="#1e293b"/>
+                        <g fill="#233b3a">
+                            <ellipse cx="255" cy="55" rx="70" ry="48"/><ellipse cx="465" cy="248" rx="48" ry="34"/><ellipse cx="635" cy="285" rx="65" ry="30"/><ellipse cx="440" cy="530" rx="85" ry="38"/>
+                            <rect x="205" y="145" width="110" height="50" rx="6"/><rect x="565" y="215" width="130" height="50" rx="6"/><rect x="400" y="440" width="120" height="70" rx="6"/><rect x="195" y="470" width="150" height="60" rx="6"/>
+                        </g>
+                        <g fill="#0c4a6e" stroke="#0c4a6e">
+                            <path d="M0 400 Q45 430 75 540 L0 540Z" stroke="none"/><ellipse cx="635" cy="338" rx="88" ry="34" stroke="none"/>
+                            <path d="M520 358 Q400 372 300 384 T170 415" fill="none" stroke-width="10" stroke-linecap="round"/>
+                        </g>
+                        <path d="M125 540 L300 350 Q410 250 440 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="8 5"/>
+                        <path d="M0 262 Q150 262 212 280 M520 352 L722 340 M330 330 L330 540" fill="none" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+                        <g fill="none" stroke-width="8" stroke-linecap="round" opacity=".95">
+                            <path d="M330 330 L358 105" stroke="#f59e0b"/><path d="M330 330 L469 78" stroke="#10b981"/>
+                            <path d="M330 330 Q260 285 211 268" stroke="#a855f7"/><path d="M330 330 Q420 355 511 352" stroke="#3b82f6"/>
+                        </g>
+                        <g font-size="14" font-weight="700" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans KR">
+                            <text x="228" y="30">노성면</text><text x="245" y="138">광석면</text><text x="520" y="138">연산면</text><text x="435" y="278">부적면</text><text x="395" y="470">은진면</text><text x="655" y="398">가야곡면</text>
+                            <text x="655" y="324" fill="#7dd3fc">탑정호</text><text x="25" y="470" fill="#7dd3fc">금강</text><text x="245" y="412" fill="#7dd3fc">논산천</text>
+                        </g>
+                        <g font-size="12" font-weight="900" fill="#fff" text-anchor="middle" font-family="Noto Sans KR">
+                            <rect x="436" y="118" width="46" height="20" rx="10" fill="#020617"/><text x="459" y="132">연산역</text>
+                            <rect x="236" y="310" width="46" height="20" rx="10" fill="#020617"/><text x="259" y="324">논산역</text>
+                            <rect x="172" y="368" width="46" height="20" rx="10" fill="#020617"/><text x="195" y="382">강경역</text>
+                        </g>
+                        <!-- 거점 -->
+                        <g class="pin" tabindex="0" role="button" aria-label="딸기 엑스포" data-zone="hub" onclick="selectZone('hub')" onkeydown="if(event.key==='Enter')selectZone('hub')">
+                            <circle class="pulse" cx="330" cy="330" r="38" fill="none" stroke="#e63946" stroke-width="4"/>
+                            <circle cx="330" cy="330" r="38" fill="#e63946" stroke="#fff" stroke-width="5"/>
+                            <text x="330" y="344" font-size="38" text-anchor="middle">🍓</text>
+                        </g>
+                        <rect x="262" y="372" width="136" height="26" rx="13" fill="#e63946"/>
+                        <text x="330" y="391" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" font-family="Noto Sans KR">2027 딸기 엑스포</text>
+                        <!-- 핀 -->
+                        <g class="pin" tabindex="0" role="button" aria-label="유교문화진흥원" data-zone="yugyo" onclick="selectZone('yugyo')" onkeydown="if(event.key==='Enter')selectZone('yugyo')">
+                            <path d="M358 108 C344 88 334 80 334 64 a24 24 0 1 1 48 0 C382 80 372 88 358 108Z" fill="#f59e0b" stroke="#fff" stroke-width="4"/>
+                            <circle cx="358" cy="64" r="15" fill="#0f172a"/><text class="fa-svg" x="358" y="70" font-size="15" fill="#fbbf24" text-anchor="middle">&#xf66f;</text>
+                        </g>
+                        <g class="pin" tabindex="0" role="button" aria-label="연산문화창고" data-zone="yeonsan" onclick="selectZone('yeonsan')" onkeydown="if(event.key==='Enter')selectZone('yeonsan')">
+                            <path d="M469 80 C455 60 445 52 445 36 a24 24 0 1 1 48 0 C493 52 483 60 469 80Z" fill="#10b981" stroke="#fff" stroke-width="4"/>
+                            <circle cx="469" cy="36" r="15" fill="#0f172a"/><text class="fa-svg" x="469" y="42" font-size="15" fill="#34d399" text-anchor="middle">&#xf494;</text>
+                        </g>
+                        <g class="pin" tabindex="0" role="button" aria-label="강경 근대거리" data-zone="gyanggyeong" onclick="selectZone('gyanggyeong')" onkeydown="if(event.key==='Enter')selectZone('gyanggyeong')">
+                            <path d="M211 270 C197 250 187 242 187 226 a24 24 0 1 1 48 0 C235 242 225 250 211 270Z" fill="#a855f7" stroke="#fff" stroke-width="4"/>
+                            <circle cx="211" cy="226" r="15" fill="#0f172a"/><text class="fa-svg" x="211" y="232" font-size="15" fill="#c084fc" text-anchor="middle">&#xf19c;</text>
+                        </g>
+                        <g class="pin" tabindex="0" role="button" aria-label="탑정호 수변공원" data-zone="topjeong" onclick="selectZone('topjeong')" onkeydown="if(event.key==='Enter')selectZone('topjeong')">
+                            <path d="M511 354 C497 334 487 326 487 310 a24 24 0 1 1 48 0 C535 326 525 334 511 354Z" fill="#3b82f6" stroke="#fff" stroke-width="4"/>
+                            <circle cx="511" cy="310" r="15" fill="#0f172a"/><text class="fa-svg" x="511" y="316" font-size="15" fill="#60a5fa" text-anchor="middle">&#xf773;</text>
+                        </g>
+                        <g font-size="14" font-weight="900" fill="#fff" text-anchor="middle" font-family="Noto Sans KR" stroke="#0f172a" stroke-width="4" paint-order="stroke">
+                            <text x="306" y="128">유교문화진흥원</text><text x="521" y="100">연산문화창고</text>
+                            <text x="211" y="292">강경 근대거리</text><text x="521" y="376">탑정호 수변공원</text>
+                        </g>
+                    </svg>
                 </div>
-            </div>
-
-            <!-- Active Zone Detail Card View -->
-            <div id="zone-content-container" class="bg-slate-800 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-300">
-                <!-- Dynamically populated via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Tour Benefits & Step-by-Step Mechanism -->
-    <section id="benefits" class="py-16 bg-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-berry-600 font-bold text-xs sm:text-sm uppercase tracking-widest">How to Enjoy</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">투어 혜택 & 이용 방법</h2>
-                <p class="text-slate-500 text-sm sm:text-base mt-2">프로그램 참여 후 안내센터에서 피규어 교통카드를 받고 자유롭게 이동하세요</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Step 1 Card -->
-                <div class="bg-berry-50/50 p-6 sm:p-8 rounded-3xl border border-berry-100 relative hover:-translate-y-1 transition duration-300">
-                    <div class="w-12 h-12 bg-berry-600 text-white font-black text-xl rounded-2xl flex items-center justify-center mb-6 shadow-md shadow-berry-200">
-                        1
-                    </div>
-                    <span class="text-xs font-bold text-berry-600 bg-berry-100 px-3 py-1 rounded-full uppercase">발급 단계</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 mt-3 mb-2">피규어 교통카드 발급</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        **베리프렌즈 혹은 딸기엑스포 한정판 피규어 교통카드**를 딸기축제장 안내센터에서 발급받습니다. 대만 EasyCard 모티브의 키링 카드 형태로 이동과 혜택을 함께 누릴 수 있습니다.
-                    </p>
-                </div>
-
-                <!-- Step 2 Card -->
-                <div class="bg-indigo-50/50 p-6 sm:p-8 rounded-3xl border border-indigo-100 relative hover:-translate-y-1 transition duration-300">
-                    <div class="w-12 h-12 bg-indigo-600 text-white font-black text-xl rounded-2xl flex items-center justify-center mb-6 shadow-md shadow-indigo-200">
-                        2
-                    </div>
-                    <span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full uppercase">선택 단계</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 mt-3 mb-2">가고 싶은 관광지 선택</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        정해진 순서 없이 본인의 취향대로! 낮에는 문화창고 쿠킹클래스, 밤에는 유교문화진흥원 국악힙합 DJ나 탑정호 미디어 파사드로 자유롭게 이동하고 즐깁니다.
-                    </p>
-                </div>
-
-                <!-- Step 3 Card -->
-                <div class="bg-emerald-50/50 p-6 sm:p-8 rounded-3xl border border-emerald-100 relative hover:-translate-y-1 transition duration-300">
-                    <div class="w-12 h-12 bg-emerald-600 text-white font-black text-xl rounded-2xl flex items-center justify-center mb-6 shadow-md shadow-emerald-200">
-                        3
-                    </div>
-                    <span class="text-xs font-bold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full uppercase">환급 단계</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 mt-3 mb-2">쓰는 만큼 마일리지</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        축제장에서 소비한 영수증을 등록하면 소비액의 **10~20%를 마일리지**으로 적립! 코스로 이동할 때 사용합니다.
-                    </p>
+                <!-- 상세 -->
+                <div class="lg:col-span-5 flex flex-col gap-3">
+                    <div class="flex flex-wrap gap-2" id="chips"></div>
+                    <div id="zone-card" class="flex-1 bg-slate-800 border border-slate-700 rounded-3xl p-5 sm:p-6 shadow-2xl" aria-live="polite"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer & Team Credits -->
+    <!-- STORY -->
+    <section id="story" class="fit-screen py-12 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="text-berry-600 font-bold text-xs sm:text-sm uppercase tracking-widest">Tour Story</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">딸기 하나로 시작되는 하루</h2>
+                <p class="text-slate-500 text-sm sm:text-base mt-2">축제장 입장부터 밤의 마지막 코스까지, 한 사람의 하루를 따라가 보세요</p>
+            </div>
+            <div class="hidden lg:block h-2 rounded-full bg-gradient-to-r from-amber-400 via-berry-500 to-indigo-700 mb-5"></div>
+            <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+                <li class="bg-amber-50/60 p-5 rounded-3xl border border-amber-100 hover:-translate-y-1 transition duration-300">
+                    <div class="w-10 h-10 bg-amber-500 text-white font-black rounded-2xl flex items-center justify-center mb-3 shadow-md">1</div>
+                    <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">오전 · 도착</span>
+                    <h3 class="text-lg font-extrabold text-slate-900 mt-3 mb-1">딸기 향 속으로</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">딸기축제장에서 딸기를 맛보고 고르며 축제를 즐깁니다.</p>
+                </li>
+                <li class="bg-sky-50/60 p-5 rounded-3xl border border-sky-100 hover:-translate-y-1 transition duration-300">
+                    <div class="w-10 h-10 bg-sky-500 text-white font-black rounded-2xl flex items-center justify-center mb-3 shadow-md">2</div>
+                    <span class="text-xs font-bold text-sky-700 bg-sky-100 px-3 py-1 rounded-full">점심 · 보관</span>
+                    <h3 class="text-lg font-extrabold text-slate-900 mt-3 mb-1">두 손은 가볍게</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">산 딸기를 신선 냉장 보관소에 맡기고 가벼운 마음으로 나섭니다.</p>
+                </li>
+                <li class="bg-berry-50/60 p-5 rounded-3xl border border-berry-100 hover:-translate-y-1 transition duration-300">
+                    <div class="w-10 h-10 bg-berry-600 text-white font-black rounded-2xl flex items-center justify-center mb-3 shadow-md">3</div>
+                    <span class="text-xs font-bold text-berry-600 bg-berry-100 px-3 py-1 rounded-full">오후 · 발급</span>
+                    <h3 class="text-lg font-extrabold text-slate-900 mt-3 mb-1">피규어 카드 득템</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">안내센터에서 교통카드를 받고 영수증을 등록해 <b>10~20% 마일리지</b>를 적립합니다.</p>
+                </li>
+                <li class="bg-emerald-50/60 p-5 rounded-3xl border border-emerald-100 hover:-translate-y-1 transition duration-300">
+                    <div class="w-10 h-10 bg-emerald-600 text-white font-black rounded-2xl flex items-center justify-center mb-3 shadow-md">4</div>
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">오후 · 선택</span>
+                    <h3 class="text-lg font-extrabold text-slate-900 mt-3 mb-1">내 맘대로 코스</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">순서는 자유! 문화창고 쿠킹클래스나 강경 레트로 거리로 떠납니다.</p>
+                </li>
+                <li class="bg-slate-800 text-white p-5 rounded-3xl border border-slate-700 hover:-translate-y-1 transition duration-300">
+                    <div class="w-10 h-10 bg-indigo-500 text-white font-black rounded-2xl flex items-center justify-center mb-3 shadow-md">5</div>
+                    <span class="text-xs font-bold text-indigo-300 bg-indigo-500/20 px-3 py-1 rounded-full">저녁 · 밤</span>
+                    <h3 class="text-lg font-extrabold mt-3 mb-1">해가 지면 시작</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">국악×힙합 DJ, 별빛 영화제, 출렁다리 미디어 파사드를 만납니다.</p>
+                </li>
+                <li class="bg-slate-900 text-white p-5 rounded-3xl border border-slate-800 hover:-translate-y-1 transition duration-300">
+                    <div class="w-10 h-10 bg-purple-500 text-white font-black rounded-2xl flex items-center justify-center mb-3 shadow-md">6</div>
+                    <span class="text-xs font-bold text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full">밤 · 마무리</span>
+                    <h3 class="text-lg font-extrabold mt-3 mb-1">달콤한 귀가</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">마일리지로 이동하고 상점에서 쓰고, 보관소에서 딸기를 찾아 귀가합니다.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-800">
                 <div class="md:col-span-6 space-y-3">
-                    <div class="flex items-center gap-2">
-                        <span class="bg-berry-600 text-white font-extrabold text-xs px-2.5 py-1 rounded">HUSS LAB</span>
-                        <span class="text-white font-black text-lg">2027 논산세계딸기산업엑스포</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">
-                        본 웹사이트는 HUSS LAB 프로젝트의 일환으로 기획된 <strong>논산 Day & Night 딸기 시크릿 투어</strong> 제안 설명 웹페이지입니다.
-                    </p>
+                    <div class="flex items-center gap-2"><span class="bg-berry-600 text-white font-extrabold text-xs px-2.5 py-1 rounded">HUSS LAB</span><span class="text-white font-black text-lg">2027 논산세계딸기산업엑스포</span></div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">본 웹사이트는 HUSS LAB 프로젝트의 일환으로 기획된 <strong>논산 Day & Night 딸기 시크릿 투어</strong> 제안 설명 웹페이지입니다.</p>
                 </div>
                 <div class="md:col-span-3 text-xs space-y-2">
                     <h4 class="text-white font-bold mb-2">주요 거점 위치</h4>
-                    <p class="text-slate-400">• 딸기축제장·엑스포 (중앙 거점)</p>
-                    <p class="text-slate-400">• 강경 근대역사문화거리 (강경읍)</p>
-                    <p class="text-slate-400">• 연산문화창고 (연산면)</p>
-                    <p class="text-slate-400">• 유교문화진흥원 (노성면)</p>
-                    <p class="text-slate-400">• 탑정호 수변공원 (부적면)</p>
+                    <p>• 딸기축제장·엑스포 (중앙 거점)</p><p>• 강경 근대역사문화거리 (강경읍)</p><p>• 연산문화창고 (연산면)</p><p>• 유교문화진흥원 (노성면)</p><p>• 탑정호 수변공원 (부적면)</p>
                 </div>
                 <div class="md:col-span-3 text-xs space-y-2">
                     <h4 class="text-white font-bold mb-2">투어 문의 & 지원</h4>
-                    <p class="text-slate-400">운영 장소: 딸기축제장 안내센터</p>
-                    <p class="text-slate-400">교통카드 발급: ONLY 축제장 현장 발급</p>
-                    <p class="text-slate-400">보관 서비스: 생딸기 신선 냉장 보관소부스 운영</p>
+                    <p>운영 장소: 딸기축제장 안내센터</p><p>교통카드 발급: ONLY 축제장 현장 발급</p><p>보관 서비스: 생딸기 신선 냉장 보관소 부스 운영</p>
                 </div>
             </div>
             <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-2">
@@ -446,143 +320,70 @@
         </div>
     </footer>
 
-    <!-- Interactive Logic Script -->
     <script>
-        const zoneData = {
-            hub: {
-                title: "딸기축제장 · 엑스포 (중앙 거점)",
-                tagline: "모든 투어의 출발점이이자 신선 보관 및 혜택 환급의 중심지",
-                dayProgram: [
-                    "딸기 신선 냉장 보관소 운영 (구매한 생딸기 보관 후 자유 투어)",
-                    "베리프렌즈 한정판 피규어 교통카드 현장 발급 및 충전",
-                    "축제장 소비 영수증 적립 및 스마트 마일리지 창구 운영"
-                ],
-                nightProgram: [
-                    "엑스포 야간 불빛 광장 산책 및 야간 딸기 디저트 존",
-                    "버스킹 공연 및 야간 엑스포 조명 연출"
-                ],
-                transport: "논산역/강경역 버스 및 축제장 순환 셔틀 연계"
-            },
-            gyanggyeong: {
-                title: "강경 근대역사문화거리 (강경읍)",
-                tagline: "레트로거리 산책과 힙한 재즈·와인 밤 파티",
-                dayProgram: [
-                    "[DAY] 힙-선비 레트로 거리 산책 및 근대 건축물 탐방",
-                    "강경 구 소금창고 및 근대역사 전시 관람"
-                ],
-                nightProgram: [
-                    "[NIGHT] 힙-선비 야외 파티",
-                    "감성 재즈 버스킹 & 팝업 와인 바 운영"
-                ],
-                transport: "강경역 도보 10분 / 엑스포 거점 직행 버스"
-            },
-            yeonsan: {
-                title: "연산문화창고 (연산면)",
-                tagline: "낮 피크닉과 쿠킹클래스, 밤 야외 별빛 영화제",
-                dayProgram: [
-                    "[DAY] 잔디밭 피크닉 & 딸기 디저트 쿠킹 클래스",
-                    "어린이 및 가족 단위 공예/체험 프로그램"
-                ],
-                nightProgram: [
-                    "[NIGHT] 피크닉 & 별빛 영화제 (창고 야외 영화 상영)",
-                    "밤에 열리는 야시장 및 지역 공예가 마켓"
-                ],
-                transport: "연산역 연계 / 이동 버스 노선 운영"
-            },
-            yugyo: {
-                title: "유교문화진흥원 (노성면)",
-                tagline: "전통 고택과 국악×힙합 DJ, 청사초롱 저수지 밤 산책",
-                dayProgram: [
-                    "[DAY] 한옥 문화 탐방 및 유교 문화 선비 체험",
-                    "노성 윤증고택 및 명재고택 정원 산책"
-                ],
-                nightProgram: [
-                    "[NIGHT] 노키즈 레트로 재즈 클럽 & 국악×힙합 DJ 퍼포먼스",
-                    "딸기 티 바 (Strawberry Tea Bar) 시음회",
-                    "청사초롱 들고 즐기는 병사저수지 밤 산책"
-                ],
-                transport: "노성면 소재 / 셔틀 버스 정기 순환"
-            },
-            topjeong: {
-                title: "탑정호 수변공원 (부적면)",
-                tagline: "노을 감상과 출렁다리 화려한 미디어 파사드",
-                dayProgram: [
-                    "[DAY/SUNSET] 노을 멍 & 사운드워크 (자연 음향 감상)",
-                    "탑정호 출렁다리 일몰 레이크 뷰 감상"
-                ],
-                nightProgram: [
-                    "[NIGHT] 출렁다리 미디어 파사드 야간 조명 쇼",
-                    "수변 데크 산책로 야간 불빛 조망"
-                ],
-                transport: "부적면 소재 / 엑스포 직행 셔틀 노선"
-            }
+        /* ★ why: "이 프로그램을 이 장소에서 운영하는 이유" — 직접 작성하세요 ★ */
+        const zones = {
+            hub: { color: '#e63946', icon: 'fa-strawberry-fallback', emoji: '🍓', short: '엑스포', title: '딸기축제장 · 엑스포', tag: '모든 투어의 출발점이자 신선 보관 및 혜택 환급의 중심지',
+                day: ['딸기 신선 냉장 보관소 운영 (구매한 생딸기 보관 후 자유 투어)', '베리프렌즈 한정판 피규어 교통카드 현장 발급 및 충전', '축제장 소비 영수증 적립 및 스마트 마일리지 창구 운영'],
+                night: ['엑스포 야간 불빛 광장 산책 및 야간 딸기 디저트 존', '버스킹 공연 및 야간 엑스포 조명 연출'],
+                move: '논산역/강경역 버스 및 축제장 순환 셔틀 연계', why: '' },
+            gyanggyeong: { color: '#a855f7', icon: 'fa-building-columns', short: '강경', title: '강경 근대역사문화거리', tag: '레트로거리 산책과 힙한 재즈·와인 밤 파티',
+                day: ['힙-선비 레트로 거리 산책 및 근대 건축물 탐방', '강경 구 소금창고 및 근대역사 전시 관람'],
+                night: ['힙-선비 야외 파티', '감성 재즈 버스킹 & 팝업 와인 바 운영'],
+                move: '강경역 도보 10분 / 엑스포 거점 직행 버스', why: '' },
+            yeonsan: { color: '#10b981', icon: 'fa-warehouse', short: '연산', title: '연산문화창고', tag: '낮 피크닉과 쿠킹클래스, 밤 야외 별빛 영화제',
+                day: ['잔디밭 피크닉 & 딸기 디저트 쿠킹 클래스', '어린이 및 가족 단위 공예/체험 프로그램'],
+                night: ['피크닉 & 별빛 영화제 (창고 야외 영화 상영)', '밤에 열리는 야시장 및 지역 공예가 마켓'],
+                move: '연산역 연계 / 이동 버스 노선 운영', why: '' },
+            yugyo: { color: '#f59e0b', icon: 'fa-landmark', short: '노성', title: '유교문화진흥원', tag: '전통 고택과 국악×힙합 DJ, 청사초롱 저수지 밤 산책',
+                day: ['한옥 문화 탐방 및 유교 문화 선비 체험', '노성 윤증고택 및 명재고택 정원 산책'],
+                night: ['노키즈 레트로 재즈 클럽 & 국악×힙합 DJ 퍼포먼스', '딸기 티 바 (Strawberry Tea Bar) 시음회', '청사초롱 들고 즐기는 병사저수지 밤 산책'],
+                move: '노성면 소재 / 셔틀 버스 정기 순환', why: '' },
+            topjeong: { color: '#3b82f6', icon: 'fa-water', short: '탑정호', title: '탑정호 수변공원', tag: '노을 감상과 출렁다리 화려한 미디어 파사드',
+                day: ['노을 멍 & 사운드워크 (자연 음향 감상)', '탑정호 출렁다리 일몰 레이크 뷰 감상'],
+                night: ['출렁다리 미디어 파사드 야간 조명 쇼', '수변 데크 산책로 야간 불빛 조망'],
+                move: '부적면 소재 / 엑스포 직행 셔틀 노선', why: '' }
         };
 
-        function selectZone(zoneKey) {
-            // Update Tab Active UI
-            document.querySelectorAll('.zone-btn').forEach(btn => {
-                btn.classList.remove('bg-berry-600', 'border-berry-500', 'text-white');
-                btn.classList.add('bg-slate-800', 'border-slate-700', 'text-slate-300');
+        const chips = document.getElementById('chips');
+        Object.entries(zones).forEach(([k, z]) => {
+            const ic = z.emoji ? z.emoji : `<i class="fa-solid ${z.icon}"></i>`;
+            chips.insertAdjacentHTML('beforeend', `<button data-chip="${k}" onclick="selectZone('${k}')" class="px-3.5 py-2 rounded-full border border-slate-700 bg-slate-800 text-slate-300 text-xs sm:text-sm font-bold transition hover:border-slate-500">${ic} ${z.short}</button>`);
+        });
+
+        function selectZone(key) {
+            const z = zones[key];
+            document.querySelectorAll('.pin').forEach(p => p.classList.toggle('on', p.dataset.zone === key));
+            document.querySelectorAll('[data-chip]').forEach(c => {
+                const on = c.dataset.chip === key;
+                c.style.background = on ? z.color : '';
+                c.style.borderColor = on ? z.color : '';
+                c.style.color = on ? '#fff' : '';
             });
-            const activeBtn = document.getElementById(`tab-${zoneKey}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-slate-800', 'border-slate-700', 'text-slate-300');
-                activeBtn.classList.add('bg-berry-600', 'border-berry-500', 'text-white');
-            }
-
-            // Populate Content Card
-            const data = zoneData[zoneKey];
-            const container = document.getElementById('zone-content-container');
-
-            container.innerHTML = `
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-700 pb-6 mb-6 gap-4">
-                    <div>
-                        <span class="text-xs font-bold text-berry-400 uppercase tracking-widest">SELECTED ZONE PROGRAM</span>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">${data.title}</h3>
-                        <p class="text-slate-300 text-sm mt-1 font-medium">${data.tagline}</p>
+            const li = (arr, icon, cls) => arr.map(t => `<li class="flex items-start gap-2.5"><i class="fa-solid ${icon} ${cls} text-xs mt-1"></i><span>${t}</span></li>`).join('');
+            document.getElementById('zone-card').innerHTML = `
+                <div class="flex flex-col gap-2 border-b border-slate-700 pb-4 mb-4">
+                    <span class="text-xs font-bold text-berry-400 uppercase tracking-widest">Selected Zone Program</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-white">${z.title}</h3>
+                    <p class="text-slate-300 text-sm font-medium">${z.tag}</p>
+                    <div class="self-start bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-700 text-xs text-amber-300 flex items-center gap-2"><i class="fa-solid fa-bus text-amber-400"></i> ${z.move}</div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-amber-500/30">
+                        <div class="flex items-center gap-2 font-bold text-amber-400 mb-2"><i class="fa-solid fa-sun"></i> DAY 프로그램</div>
+                        <ul class="space-y-2 text-sm text-slate-200">${li(z.day, 'fa-circle-check', 'text-amber-400')}</ul>
                     </div>
-                    <div class="bg-slate-900/90 px-4 py-2 rounded-xl border border-slate-700 text-xs text-amber-300 flex items-center gap-2">
-                        <i class="fa-solid fa-bus text-amber-400"></i> ${data.transport}
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-indigo-500/30">
+                        <div class="flex items-center gap-2 font-bold text-indigo-400 mb-2"><i class="fa-solid fa-moon"></i> NIGHT 프로그램</div>
+                        <ul class="space-y-2 text-sm text-slate-200">${li(z.night, 'fa-star', 'text-indigo-400')}</ul>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-amber-500/30">
-                        <div class="flex items-center gap-2 font-bold text-amber-400 text-lg mb-3">
-                            <i class="fa-solid fa-sun"></i> DAY 프로그램 (낮)
-                        </div>
-                        <ul class="space-y-2.5 text-sm text-slate-200">
-                            ${data.dayProgram.map(p => `<li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-check text-amber-400 text-xs mt-1"></i> <span>${p}</span></li>`).join('')}
-                        </ul>
-                    </div>
-
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-indigo-500/30">
-                        <div class="flex items-center gap-2 font-bold text-indigo-400 text-lg mb-3">
-                            <i class="fa-solid fa-moon"></i> NIGHT 프로그램 (밤)
-                        </div>
-                        <ul class="space-y-2.5 text-sm text-slate-200">
-                            ${data.nightProgram.map(p => `<li class="flex items-start gap-2.5"><i class="fa-solid fa-star text-indigo-400 text-xs mt-1"></i> <span>${p}</span></li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-            `;
+                <div class="mt-3 p-4 rounded-2xl border-2 border-dashed border-slate-600">
+                    <div class="font-bold text-berry-400 text-sm mb-1"><i class="fa-solid fa-lightbulb"></i> 왜 이 장소에서 운영할까요?</div>
+                    <p class="text-sm leading-relaxed ${z.why ? 'text-slate-200' : 'text-slate-500'}">${z.why || '운영 이유를 작성해 주세요. (코드 상단 zones 안의 why 값)'}</p>
+                </div>`;
         }
-
-        function calculateCashback() {
-            const input = document.getElementById('spending-input');
-            const val = parseFloat(input.value) || 0;
-            const cashback10 = Math.floor(val * 0.1);
-            const cashback20 = Math.floor(val * 0.2);
-
-            document.getElementById('cashback-10').innerText = cashback10.toLocaleString() + " 원";
-            document.getElementById('cashback-20').innerText = cashback20.toLocaleString() + " 원";
-        }
-
-        // Initialize default state
-        window.onload = function() {
-            selectZone('hub');
-            calculateCashback();
-        };
+        window.onload = function () { selectZone('hub'); };
     </script>
 </body>
 </html>
